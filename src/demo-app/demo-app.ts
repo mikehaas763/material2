@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Route, Routes, ROUTER_DIRECTIVES} from '@angular/router';
 import {CardDemo} from './card/card-demo';
+import {BottomnavDemo} from './bottomnav/bottomnav-demo';
 import {ButtonDemo} from './button/button-demo';
 import {IconDemo} from './icon/icon-demo';
 import {RadioDemo} from './radio/radio-demo';
@@ -50,6 +51,7 @@ export class Home {}
 })
 @Routes([
   new Route({path: '/', component: Home}),
+  new Route({path: '/bottomnav', component: BottomnavDemo}),
   new Route({path: '/button', component: ButtonDemo}),
   new Route({path: '/card', component: CardDemo}),
   new Route({path: '/radio', component: RadioDemo}),
