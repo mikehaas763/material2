@@ -13,6 +13,8 @@ import {
   ElementRef,
   QueryList,
   OnChanges,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
@@ -20,15 +22,15 @@ import {
 } from '@angular/common';
 import {BooleanFieldValue} from '../../core/annotations/field-value';
 import {MdError} from '../../core/errors/error';
+import {Observable} from 'rxjs/Observable';
 
 
 const noop = () => {};
 
-const MD_INPUT_CONTROL_VALUE_ACCESSOR = new Provider(
-    NG_VALUE_ACCESSOR, {
-      useExisting: forwardRef(() => MdInput),
-      multi: true
-    });
+const MD_INPUT_CONTROL_VALUE_ACCESSOR = new Provider(NG_VALUE_ACCESSOR, {
+  useExisting: forwardRef(() => MdInput),
+  multi: true
+});
 
 // Invalid input type. Using one of these will throw an MdInputUnsupportedTypeError.
 const MD_INPUT_INVALID_INPUT_TYPE = [
@@ -71,9 +73,7 @@ export class MdInputDuplicatedHintError extends MdError {
 export class MdPlaceholder {}
 
 
-/**
- * The hint directive, used to tag content as hint labels (going under the input).
- */
+/** The hint directive, used to tag content as hint labels (going under the input). */
 @Directive({
   selector: 'md-hint',
   host: {
@@ -128,6 +128,7 @@ export class MdInput implements ControlValueAccessor, AfterContentInit, OnChange
   get characterCount(): number {
     return this.empty ? 0 : ('' + this._value).length;
   }
+  get inputId(): string { return `${this.id}-input`; }
 
   /**
    * Bindings.
@@ -143,6 +144,19 @@ export class MdInput implements ControlValueAccessor, AfterContentInit, OnChange
   @Input() @BooleanFieldValue() required: boolean = false;
   @Input() @BooleanFieldValue() spellcheck: boolean = false;
   @Input() type: string = 'text';
+
+  private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
+  @Output('blur')
+  get onBlur(): Observable<FocusEvent> {
+    return this._blurEmitter.asObservable();
+  }
+
+  @Output('focus')
+  get onFocus(): Observable<FocusEvent> {
+    return this._focusEmitter.asObservable();
+  }
 
   get value(): any { return this._value; };
   @Input() set value(v: any) {
@@ -167,17 +181,21 @@ export class MdInput implements ControlValueAccessor, AfterContentInit, OnChange
   }
 
   /** @internal */
-  onFocus() {
+  handleFocus(event: FocusEvent) {
     this._focused = true;
+    this._focusEmitter.emit(event);
   }
+
   /** @internal */
-  onBlur() {
+  handleBlur(event: FocusEvent) {
     this._focused = false;
     this._onTouchedCallback();
+    this._blurEmitter.emit(event);
   }
+
   /** @internal */
-  onChange(ev: Event) {
-    this.value = (<HTMLInputElement>ev.target).value;
+  handleChange(event: Event) {
+    this.value = (<HTMLInputElement>event.target).value;
     this._onTouchedCallback();
   }
 
@@ -201,6 +219,7 @@ export class MdInput implements ControlValueAccessor, AfterContentInit, OnChange
     this._onTouchedCallback = fn;
   }
 
+  /** @internal */
   ngAfterContentInit() {
     this._validateConstraints();
 
@@ -210,6 +229,7 @@ export class MdInput implements ControlValueAccessor, AfterContentInit, OnChange
     });
   }
 
+  /** @internal */
   ngOnChanges(changes: {[key: string]: SimpleChange}) {
     this._validateConstraints();
   }

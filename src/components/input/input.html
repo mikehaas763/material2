@@ -12,16 +12,16 @@
              [attr.aria-disabled]="ariaDisabled"
              [attr.aria-required]="ariaRequired"
              [attr.aria-invalid]="ariaInvalid"
-             [id]="id"
+             [id]="inputId"
              [disabled]="disabled"
              [required]="required"
              [spellcheck]="spellcheck"
              [attr.maxlength]="maxLength"
              [type]="type"
-             (focus)="onFocus()"
-             (blur)="onBlur()"
+             (focus)="handleFocus($event)"
+             (blur)="handleBlur($event)"
              [(ngModel)]="value"
-             (change)="onChange($event)">
+             (change)="handleChange($event)">
 
       <label class="md-input-placeholder"
              [attr.for]="id"
