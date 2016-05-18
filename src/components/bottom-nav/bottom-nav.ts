@@ -1,13 +1,15 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  ViewEncapsulation,
 } from '@angular/core';
 
 
 @Component({
   selector: 'md-bottom-nav',
-  templateUrl: './components/bottom-nav/bottom-nav.html',
+  template: '<ng-content></ng-content>',
   styleUrls: ['./components/bottom-nav/bottom-nav.css'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdBottomNav {
@@ -15,9 +17,10 @@ export class MdBottomNav {
 }
 
 @Component({
-  selector: 'a[md-nav-item]',
-  templateUrl: './components/bottom-nav/bottom-nav.html',
+  selector: 'md-bottom-nav > a[md-nav-item]', // todo research proper selector
+  template: '<ng-content></ng-content>',
   styleUrls: ['./components/bottom-nav/bottom-nav.css'],
+  encapsulation: ViewEncapsulation.None,  
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdNavItem {
