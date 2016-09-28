@@ -1,6 +1,7 @@
 export * from './core';
 export * from './module';
 
+export * from './bottom-nav/index';
 export * from './button/index';
 export * from './button-toggle/index';
 export * from './card/index';

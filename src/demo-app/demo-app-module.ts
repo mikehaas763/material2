@@ -24,6 +24,7 @@ import {LiveAnnouncerDemo} from './live-announcer/live-announcer-demo';
 import {OverlayDemo, SpagettiPanel, RotiniPanel} from './overlay/overlay-demo';
 import {SlideToggleDemo} from './slide-toggle/slide-toggle-demo';
 import {ToolbarDemo} from './toolbar/toolbar-demo';
+import {BottomNavDemo} from './bottom-nav/bottom-nav-demo';
 import {ButtonDemo} from './button/button-demo';
 import {MdCheckboxDemoNestedChecklist, CheckboxDemo} from './checkbox/checkbox-demo';
 import {SelectDemo} from './select/select-demo';
@@ -46,6 +47,7 @@ import {TabsDemo} from './tabs/tab-group-demo';
   ],
   declarations: [
     BaselineDemo,
+    BottomNavDemo,
     ButtonDemo,
     ButtonToggleDemo,
     CardDemo,

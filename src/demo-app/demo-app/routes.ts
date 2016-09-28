@@ -1,5 +1,6 @@
 import {Routes} from '@angular/router';
 import {Home} from './demo-app';
+import {BottomNavDemo} from '../bottom-nav/bottom-nav-demo';
 import {ButtonDemo} from '../button/button-demo';
 import {BaselineDemo} from '../baseline/baseline-demo';
 import {ButtonToggleDemo} from '../button-toggle/button-toggle-demo';
@@ -31,6 +32,7 @@ import {SnackBarDemo} from '../snack-bar/snack-bar-demo';
 
 export const DEMO_APP_ROUTES: Routes = [
   {path: '', component: Home},
+  {path: 'bottom-nav', component: BottomNavDemo},
   {path: 'button', component: ButtonDemo},
   {path: 'card', component: CardDemo},
   {path: 'radio', component: RadioDemo},

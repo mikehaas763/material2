@@ -10,6 +10,7 @@ import {
 } from './core/index';
 
 import {MdButtonToggleModule} from './button-toggle/index';
+import {MdBottomNavModule} from './bottom-nav/index';
 import {MdButtonModule} from './button/index';
 import {MdCheckboxModule} from './checkbox/index';
 import {MdRadioModule} from './radio/index';
@@ -33,6 +34,7 @@ import {MdDialogModule} from './dialog/index';
 
 
 const MATERIAL_MODULES = [
+  MdBottomNavModule,
   MdButtonModule,
   MdButtonToggleModule,
   MdCardModule,
@@ -64,6 +66,7 @@ const MATERIAL_MODULES = [
 
 @NgModule({
   imports: [
+    MdBottomNavModule.forRoot(),
     MdButtonModule.forRoot(),
     MdCardModule.forRoot(),
     MdCheckboxModule.forRoot(),
