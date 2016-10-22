@@ -2,7 +2,11 @@
     display: flex;
     justify-content: space-between;
 
-    .md-bottom-nav-item {
+    > .md-bottom-nav-item {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        flex: 1;
         margin: auto;
     }
 }
