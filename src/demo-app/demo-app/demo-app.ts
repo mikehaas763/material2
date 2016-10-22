@@ -20,6 +20,7 @@ export class Home {}
 })
 export class DemoApp {
   navItems = [
+    {name: 'Bottom Navigation', route: 'bottom-nav'},
     {name: 'Button', route: 'button'},
     {name: 'Button Toggle', route: 'button-toggle'},
     {name: 'Card', route: 'card'},
