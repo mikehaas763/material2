@@ -1,6 +1,9 @@
+@import '../core/style/variables';
+
 .md-bottom-nav {
     display: flex;
     justify-content: space-between;
+    font-family: $md-font-family;
 
     > .md-bottom-nav-item {
         display: flex;
@@ -8,5 +11,10 @@
         align-items: center;
         flex: 1;
         margin: auto;
+        text-decoration: none;
+
+        // &::visited {
+        //     col
+        // }
     }
 }
